@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      .form-horizontal
+        .form-group
+          label.col-sm-2.control-label 邮箱
+          .col-sm-5
+            input#signupName.form-control(name="user[mail]", type="text" readonly value=user.mail)
+        .form-group
+          label.col-sm-2.control-label 姓名
+          .col-sm-5
+            input#signupName.form-control(name="user[name]", type="text" readonly value=user.name)
+        .form-group
+          label.col-sm-2.control-label 性别
+          .col-sm-5
+            input#signupName.form-control(name="user[sex]", type="text" readonly value=user.sex==='male'?'男':'女')
+        .form-group
+          label.col-sm-2.control-label 年龄
+          .col-sm-5
+            input#signupName.form-control(name="user[age]", type="text" readonly value=user.age)
+        .form-group
+          label.col-sm-2.control-label 联系电话
+          .col-sm-5
+            input#signupName.form-control(name="user[tel]", type="text" readonly value=user.tel)
+        .form-group
+          label.col-sm-2.control-label 部门
+          .col-sm-5
+            input#signupName.form-control(name="user[department]", type="text" readonly value=user.department)
+        .form-group
+          label.col-sm-2.control-label 职位
+          .col-sm-5
+            input#signupName.form-control(name="user[position]", type="text" readonly value=user.position)
+        .form-group
+          label.col-sm-2.control-label 级别
+          .col-sm-5
+            input#signupName.form-control(name="user[role]", type="text" readonly value=user.role===0?'普通用户':'管理员')                                            
+

@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  .container
+    if user
+      if user.role
+        h2 您是管理员,你具有以下权限:
+        a.btn.btn-success(href="/admin/user/list") 管理成员列表
+      else
+        h2 您是普通用户
+    else
+      h2 您还没有登录

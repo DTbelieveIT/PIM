@@ -1,0 +1,21 @@
+{
+  "name": "pim",
+  "description": "Personal Infomation Management in TYA",
+  "main": "index.js",
+  "authors": [
+    "guodongtao <gdtbelievefuture@163.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

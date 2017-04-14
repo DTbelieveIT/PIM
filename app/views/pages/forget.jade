@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      .col-md-5
+        form(method="POST", action="/user/forget")
+          .modal-body
+            .form-group
+              label(for="Mail") 邮箱
+              input#Mail.form-control(name="user[mail]", data-validation="email",data-validation-error-msg="You did not enter a valid e-mail")
+            .form-group
+              label(for="Password") 密码
+              input#Password.form-control(name="user[password]", type="password",data-validation="required",     data-validation-error-msg="You did not enter a password")
+          .modal-footer
+            button.btn.btn-success(type="submit") 修改密码
+            script(src="/libs/jquery-form-validator/form-validator/jquery.form-validator.min.js")
+            script(src="/js/validate.js")

@@ -1,0 +1,48 @@
+extend ../layout
+
+block content
+  .container
+    .row
+      form.form-horizontal(method="POST", action="/user/signup")
+        .form-group
+          label.col-sm-2.control-label(for="signupMail") 邮箱
+          .col-sm-5
+            input#signupName.form-control(name="user[mail]", data-validation="email",data-validation-error-msg="You did not enter a valid e-mail")
+        .form-group
+          label.col-sm-2.control-label(for="signupPassword") 密码
+          .col-sm-5
+            input#signupPassword.form-control(name="user[password]",type="password",data-validation="required",     data-validation-error-msg="You did not enter a password")
+        .form-group
+          label(for="signupName").col-sm-2.control-label 姓名
+          .col-sm-5
+            input#signupName.form-control(name="user[name]", type="text")
+        .form-group
+          label.col-sm-2.control-label(for='inputTitle') 性别
+          .col-sm-10
+            label.radio-inline 
+              input(type="radio",name="user[sex]",value="male",checked="checked")
+              | 男
+            label.radio-inline
+              input(type="radio",name="user[sex]",value="female")
+              | 女
+        .form-group
+          label.col-sm-2.control-label(for="signupTel") 联系电话
+          .col-sm-5
+            input#signupTel.form-control(name="user[tel]", type="number",data-validation-regexp="^([0-9]+)$",data-validation="length" data-validation-length="11",data-validation-error-msg="You did not enter a validate phone")
+        .form-group
+          label.col-sm-2.control-label(for="signupAge") 年龄
+          .col-sm-5
+            input#signupAge.form-control(name="user[age]", type="number")
+        .form-group
+          label.col-sm-2.control-label(for="signupDep") 部门
+          .col-sm-5  
+            input#signupDep.form-control(name="user[department]", type="text")              
+        .form-group
+          label.col-sm-2.control-label(for="signupPos") 职位
+          .col-sm-5
+            input#signupPos.form-control(name="user[position]", type="text")
+        .form-group
+          .col-sm-offset-2.col-sm-10
+            button.btn.btn-success(type="submit") 注册
+        script(src="/libs/jquery-form-validator/form-validator/jquery.form-validator.min.js")
+        script(src="/js/validate.js")
