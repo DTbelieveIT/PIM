@@ -1,5 +1,7 @@
 let Index = require('../app/controllers/index')
 let User = require('../app/controllers/user')
+let multipart = require('connect-multiparty')
+let multipartMiddleware = multipart()
 
 module.exports = function(app){
 	//pre handle user
@@ -17,14 +19,14 @@ module.exports = function(app){
 	app.get('/signin',User.showSignin)
 	app.get('/signup',User.showSignup)
 	app.get('/forget',User.forget)
-	app.post('/user/signup',User.signup)
+	app.post('/user/signup',multipartMiddleware,User.saveImg,User.signup)
 	app.post('/user/signin',User.signin)
 	app.post('/user/forget',User.modifyPassword)
 	app.get('/logout',User.logout)
-	app.get('/admin/user/list',User.signinRequired,User.adminRequired,User.list)
-	app.get('/admin/user/add',User.signinRequired,User.adminRequired,User.add)
-	app.get('/admin/user/detail/:id',User.signinRequired,User.adminRequired,User.detail)
-	app.get('/admin/user/update/:id',User.signinRequired,User.adminRequired,User.update)
-	app.post('/admin/user',User.signinRequired,User.adminRequired,User.save)
-	app.delete('/admin/user/list',User.signinRequired,User.adminRequired,User.del)
+	app.get('/admin/user/list',User.signinRequired,User.list)
+	app.get('/admin/user/add',User.signinRequired,User.add)
+	app.get('/admin/user/detail/:id',User.signinRequired,User.detail)
+	app.get('/admin/user/update/:id',User.signinRequired,User.update)
+	app.post('/admin/user',User.signinRequired,multipartMiddleware,User.saveImg,User.save)
+	app.delete('/admin/user/list',User.signinRequired,User.del)
 }

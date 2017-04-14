@@ -12,7 +12,7 @@ var UserSchema = new mongoose.Schema({
 	role:{
 		type:Number,
 		enum:[0,1],
-		default:0
+		default:1
 	},
 	name:String,
 	sex:{
@@ -23,6 +23,7 @@ var UserSchema = new mongoose.Schema({
 	tel:Number,
 	position:String,
 	department:String,
+	img:String,
 	meta: {
 		createAt: {
 			type: Date,

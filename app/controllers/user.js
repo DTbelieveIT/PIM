@@ -1,5 +1,7 @@
 let User = require('../models/user')
-let _  = require('underscore');
+let _  = require('underscore')
+let fs = require('fs')
+let path = require('path')
 
 //signup page
 exports.showSignup = function(req,res){
@@ -20,7 +22,6 @@ exports.signin = function(req,res){
 	let _user = req.body.user
 	let mail = _user.mail
 	let password = _user.password
-	console.log(_user)
 	User.findOne({mail:mail},function(err,user){
 		if(err){
 			console.log(err)
@@ -49,6 +50,11 @@ exports.signin = function(req,res){
 exports.signup = function(req,res){
 	let _user = req.body.user
 	let mail = _user.mail
+
+	if(req.img){
+		_user.img = req.img
+	}
+
 	User.findOne({mail:mail},function(err,user){
 		if(err){
 			console.log(err)
@@ -124,6 +130,10 @@ exports.save = function(req,res){
 	let id = req.body.user._id
 	let _user
 
+	if(req.img){
+		userObj.img = req.img
+	}
+
 	if(id){
 		User.findById(id,function(err,user){
 			let ppassword = user.password
@@ -140,7 +150,7 @@ exports.save = function(req,res){
 					if(err){
 						console.log(err)
 					}	
-					res.redirect('/admin/user/detail/'+ _user._id)
+					res.redirect('/admin/user/list')
 				})
 			})
 		})
@@ -159,12 +169,6 @@ exports.save = function(req,res){
 //user detail
 exports.detail = function(req,res){
 	let id = req.params.id
-
-	User.update({_id:id},function(err){
-		if(err){
-			console.log(err)
-		}
-	})
 
 	User.findById(id,function(err,user){
 		if(err){
@@ -224,9 +228,6 @@ exports.modifyPassword = function(req,res){
 			console.log(err)
 		}
 		_user = _.extend(user,userObj)
-		console.log(111111111111)
-		console.log(_user)
-		console.log(111111111111)
 		_user.save(function(err,user){
 			if(err){
 				console.log(err)
@@ -234,4 +235,27 @@ exports.modifyPassword = function(req,res){
 			res.redirect('/signin')
 		})
 	})
+}
+
+//save img
+exports.saveImg = function(req,res,next){
+	let imgData = req.files.uploadImg
+	let filePath = imgData.path
+	let originalFilename = imgData.originalFilename
+	if(originalFilename){
+		fs.readFile(filePath,function(err,data){
+			let timestamp = Date.now()
+			let type = imgData.type.split('/')[1]
+			let img = timestamp+'.'+type
+			let newPath = path.join(__dirname,'../../public/upload/'+img)
+
+			fs.writeFile(newPath,data,function(err){
+				req.img = img
+				next()
+			})
+		})
+
+	}else{
+		next()
+	}
 }

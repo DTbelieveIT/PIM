@@ -3,44 +3,63 @@ extend ../layout
 block content
   .container
     .row
-      .col-md-5
-        form(method="POST", action="/admin/user")
+      .col-md-3
+        .thumbnail
+          if user.img
+            img(src="/upload/#{user.img}")
+          else
+            img(src="/img/default.png")        
+      .col-md-5.col-sm-offset-1
+        form.form-horizontal(method="POST", action="/admin/user",enctype="multipart/form-data")
           .modal-body
             if user._id
               input(type="hidden",name="user[_id]",value=user._id)
             .form-group
-              label(for="updateMail") 邮箱
-              input#updateMail.form-control(name="user[mail]", type="text" disabled="disabled" value=user.mail)
+              label.col-sm-3.control-label(for="updateMail") 邮箱
+              .col-sm-8
+                input#updateMail.form-control(name="user[mail]", type="text" disabled="disabled" value=user.mail)
             .form-group
-              label(for="updateName") 姓名
-              input#updateName.form-control(name="user[name]", type="text" value=user.name)
+              label.col-sm-3.control-label(for="updateName") 姓名
+              .col-sm-8
+                input#updateName.form-control(name="user[name]", type="text" value=user.name)
             .form-group
-              label.radio-inline
-                input(type="radio",name="user[sex]",value="male" checked=user.sex==='male')
-                | 男
-              label.radio-inline
-                input(type="radio",name="user[sex]",value="female" checked=user.sex==='female')
-                | 女
+              label.col-sm-3.control-label 性别
+              .col-sm-8
+                label.radio-inline
+                  input(type="radio",name="user[sex]",value="male" checked=user.sex==='male')
+                  | 男
+                label.radio-inline
+                  input(type="radio",name="user[sex]",value="female" checked=user.sex==='female')
+                  | 女
             .form-group
-              label(for="signupTel") 联系电话
-              input#signupTel.form-control(name="user[tel]", type="number" value=user.tel)
+              label.col-sm-3.control-label(for="signupTel") 联系电话
+              .col-sm-8
+                input#signupTel.form-control(name="user[tel]", type="number" value=user.tel,data-validation-regexp="^([0-9]+)$",data-validation="length" data-validation-length="11",data-validation-error-msg="You did not enter a validate phone")
             .form-group
-              label(for="signupAge") 年龄
-              input#signupAge.form-control(name="user[age]", type="number" value=user.age)
+              label.col-sm-3.control-label(for="signupAge") 年龄
+              .col-sm-8
+                input#signupAge.form-control(name="user[age]", type="number" value=user.age)
             .form-group
-              label(for="signupDep") 部门
-              input#signupDep.form-control(name="user[department]", type="text" value=user.department)              
+              label.col-sm-3.control-label(for="signupDep") 部门
+              .col-sm-8
+                input#signupDep.form-control(name="user[department]", type="text" value=user.department)              
             .form-group
-              label(for="signupPos") 职位
-              input#signupPos.form-control(name="user[position]", type="text" value=user.position)
+              label.col-sm-3.control-label(for="signupPos") 职位
+              .col-sm-8
+                input#signupPos.form-control(name="user[position]", type="text" value=user.position)
             .form-group
-              label 级别
-              br
-              label.radio-inline
-                input(type="radio" name="user[role]" value="0",checked=user.role===0)
-                | 普通用户
-              label.radio-inline
-                input(type="radio" name="user[role]" value="1",checked=user.role===1)
-                | 管理员用户
+              label.col-sm-3.control-label(for="uploadImg") 上传头像
+              input#uploadImg(type="file",name="uploadImg") 
+            .form-group
+              label.col-sm-3.control-label 级别
+              .col-sm-8
+                label.radio-inline
+                  input(type="radio" name="user[role]" value="0",checked=user.role===0)
+                  | 普通用户
+                label.radio-inline
+                  input(type="radio" name="user[role]" value="1",checked=user.role===1)
+                  | 管理员用户
           .modal-footer
             button.btn.btn-success(type="submit") 更新
+          script(src="/libs/jquery-form-validator/form-validator/jquery.form-validator.min.js")
+          script(src="/js/validate.js")

@@ -3,10 +3,24 @@ extends ../layout
 block content
   .container
     if user
-      if user.role
-        h2 您是管理员,你具有以下权限:
-        a.btn.btn-success(href="/admin/user/list") 管理成员列表
-      else
-        h2 您是普通用户
+      h2 
+        strong #{user.name}
+        span &nbsp;,&nbsp;
+        span 您具有以下权限:
+      a.btn.btn-success(href="/admin/user/list") 管理成员列表
     else
-      h2 您还没有登录
+      .row
+        .col-md-5
+          form(method="POST", action="/user/signin")
+            .modal-body
+              .form-group
+                label(for="signinMail") 邮箱
+                input#signinMail.form-control(name="user[mail]", data-validation="email",data-validation-error-msg="You did not enter a valid e-mail")
+              .form-group
+                label(for="signinPassword") 密码
+                input#signinPassword.form-control(name="user[password]", type="password",data-validation="required",     data-validation-error-msg="You did not enter a password")
+            .modal-footer
+              a.btn.btn-default(href="/forget") 忘记密码
+              button.btn.btn-success(type="submit") 提交
+              script(src="/libs/jquery-form-validator/form-validator/jquery.form-validator.min.js")
+              script(src="/js/validate.js")

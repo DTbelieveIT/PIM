@@ -1,8 +1,7 @@
 //index page
 exports.index = function(req,res){
-	console.log(req.session.user)
 	res.render('index',{
-		title:'Personal Information Management in TYA',
+		title:req.session.user?'Personal Information Management in TYA':'登陆页面',
 		user:req.session.user
 	})
 }

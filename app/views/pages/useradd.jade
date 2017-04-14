@@ -3,7 +3,7 @@ extend ../layout
 block content
   .container
     .row
-      form.form-horizontal(method="POST", action="/admin/user")
+      form.form-horizontal(method="POST", action="/admin/user",enctype="multipart/form-data")
         .form-group
           label.col-sm-2.control-label(for="signupMail") 邮箱
           .col-sm-5
@@ -42,12 +42,16 @@ block content
           .col-sm-5
             input#signupPos.form-control(name="user[position]", type="text")
         .form-group
+          label.col-sm-2.control-label(for="uploadImg") 上传头像
+          .col-sm-10
+            input#uploadImg(type="file",name="uploadImg")  
+        .form-group
           label.col-sm-2.control-label(for="signupRole") 级别
           .col-sm-10
             label.radio-inline
               input(type="radio",name="user[role]",value="0")
               | 普通用户
-            label.radio-inline
+            label.radio-inline 
               input(type="radio",name="user[role]" value="1")
               | 管理员用户
         .form-group

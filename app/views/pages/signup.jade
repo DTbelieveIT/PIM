@@ -3,7 +3,7 @@ extend ../layout
 block content
   .container
     .row
-      form.form-horizontal(method="POST", action="/user/signup")
+      form.form-horizontal(method="POST", action="/user/signup",enctype="multipart/form-data")
         .form-group
           label.col-sm-2.control-label(for="signupMail") 邮箱
           .col-sm-5
@@ -41,6 +41,10 @@ block content
           label.col-sm-2.control-label(for="signupPos") 职位
           .col-sm-5
             input#signupPos.form-control(name="user[position]", type="text")
+        .form-group
+          label.col-sm-2.control-label(for="uploadImg") 上传头像
+          .col-sm-10
+            input#uploadImg(type="file",name="uploadImg")           
         .form-group
           .col-sm-offset-2.col-sm-10
             button.btn.btn-success(type="submit") 注册
