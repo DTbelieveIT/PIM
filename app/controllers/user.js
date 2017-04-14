@@ -37,7 +37,7 @@ exports.signin = function(req,res){
 			if(isMatch){
 				console.log('password is match')
 				req.session.user = user
-				return res.redirect('/')
+				return res.redirect('/admin/user/list')
 			}else{
 				console.log('password is not match')
 				return res.redirect('/signin')

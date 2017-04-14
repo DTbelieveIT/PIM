@@ -8,6 +8,7 @@ module.exports = {
 	    "sex" : "female",
 	    "tel" : 12345678910,
 	    "age" : 99,
+	    "img" : '',
 	    "department" : "逆向组",
 	    "position" : "web开发",
 	    "role" : 1,
